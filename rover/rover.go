@@ -1,6 +1,10 @@
 package rover
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/MrTanguy/rover/utils"
+)
 
 type Rover interface {
 	Move(step int)
@@ -19,9 +23,8 @@ type RoverImpl struct {
 	PlanetHeight int
 }
 
-func (r *RoverImpl) Turn(direction string, findIndex func([]string, string) int) {
-	idx := findIndex(directions, r.Orientation)
-
+func (r *RoverImpl) Turn(direction string) {
+	idx := utils.FindIndex(directions, r.Orientation)
 	if direction == "L" {
 		idx = (idx + 3) % 4
 	} else if direction == "R" {
@@ -44,12 +47,12 @@ func (r *RoverImpl) Move(step int) {
 	}
 }
 
-func (r *RoverImpl) ExecuteCommand(command string, findIndex func([]string, string) int) {
+func (r *RoverImpl) ExecuteCommand(command string) {
 	switch command {
 	case "L":
-		r.Turn("L", findIndex)
+		r.Turn("L")
 	case "R":
-		r.Turn("R", findIndex)
+		r.Turn("R")
 	case "M":
 		r.Move(1)
 	case "B":
