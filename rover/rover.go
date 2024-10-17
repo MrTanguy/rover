@@ -3,6 +3,7 @@ package rover
 import (
 	"fmt"
 
+	"github.com/MrTanguy/rover/planet"
 	"github.com/MrTanguy/rover/utils"
 )
 
@@ -14,13 +15,17 @@ type Rover interface {
 }
 
 var directions = []string{"N", "E", "S", "W"}
+var directionMap = map[string][2]int{
+	"N": {0, 1},
+	"S": {0, -1},
+	"E": {1, 0},
+	"W": {-1, 0},
+}
 
-// RoverImpl is the implementation of the Rover interface
 type RoverImpl struct {
-	X, Y         int
-	Orientation  string
-	PlanetWidth  int
-	PlanetHeight int
+	X, Y        int
+	Orientation string
+	Planet      *planet.Planet
 }
 
 func (r *RoverImpl) Turn(direction string) {
@@ -30,21 +35,13 @@ func (r *RoverImpl) Turn(direction string) {
 	} else if direction == "R" {
 		idx = (idx + 1) % 4
 	}
-
 	r.Orientation = directions[idx]
 }
 
 func (r *RoverImpl) Move(step int) {
-	switch r.Orientation {
-	case "N":
-		r.Y = (r.Y - step + r.PlanetHeight) % r.PlanetHeight
-	case "S":
-		r.Y = (r.Y + step) % r.PlanetHeight
-	case "E":
-		r.X = (r.X + step) % r.PlanetWidth
-	case "W":
-		r.X = (r.X - step + r.PlanetWidth) % r.PlanetWidth
-	}
+	change := directionMap[r.Orientation]
+	r.X = r.Planet.WrapX(r.X + change[0]*step)
+	r.Y = r.Planet.WrapY(r.Y + change[1]*step)
 }
 
 func (r *RoverImpl) ExecuteCommand(command string) {
