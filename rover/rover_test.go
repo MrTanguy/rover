@@ -61,3 +61,15 @@ func TestRoverToroidalWrapping(t *testing.T) {
 	assert.Equal(t, 0, myRover.X)
 	assert.Equal(t, 4, myRover.Y)
 }
+
+func TestRoverWrappingOnPlanetEdges(t *testing.T) {
+	myRover := &rover.RoverImpl{X: 4, Y: 4, Orientation: "E", PlanetWidth: 5, PlanetHeight: 5}
+	myRover.Move(1)
+	assert.Equal(t, 0, myRover.X)
+	assert.Equal(t, 4, myRover.Y)
+
+	myRover.Turn("R")
+	myRover.Move(1)
+	assert.Equal(t, 0, myRover.X)
+	assert.Equal(t, 0, myRover.Y)
+}
