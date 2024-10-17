@@ -6,11 +6,14 @@ import (
 	"os"
 	"strings"
 
+	"github.com/MrTanguy/rover/planet"
 	"github.com/MrTanguy/rover/rover"
 )
 
 func main() {
-	var myRover rover.Rover = &rover.RoverImpl{X: 2, Y: 2, Orientation: "N", PlanetWidth: 5, PlanetHeight: 5}
+	// Initialize the planet and rover
+	planet := planet.NewPlanet(5, 5)
+	var myRover rover.Rover = &rover.RoverImpl{X: 2, Y: 2, Orientation: "N", Planet: planet}
 
 	fmt.Println("Welcome to the Mars Rover Simulation!")
 	fmt.Println("The Rover is initially at position (2, 2) facing North.")

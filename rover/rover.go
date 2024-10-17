@@ -2,6 +2,7 @@ package rover
 
 import (
 	"fmt"
+	"github.com/MrTanguy/rover/planet"
 	"github.com/MrTanguy/rover/utils"
 )
 
@@ -21,10 +22,9 @@ var directionMap = map[string][2]int{
 }
 
 type RoverImpl struct {
-	X, Y         int
-	Orientation  string
-	PlanetWidth  int
-	PlanetHeight int
+	X, Y        int
+	Orientation string
+	Planet      *planet.Planet
 }
 
 func (r *RoverImpl) Turn(direction string) {
@@ -39,8 +39,8 @@ func (r *RoverImpl) Turn(direction string) {
 
 func (r *RoverImpl) Move(step int) {
 	change := directionMap[r.Orientation]
-	r.X = (r.X + change[0]*step + r.PlanetWidth) % r.PlanetWidth
-	r.Y = (r.Y + change[1]*step + r.PlanetHeight) % r.PlanetHeight
+	r.X = r.Planet.WrapX(r.X + change[0]*step)
+	r.Y = r.Planet.WrapY(r.Y + change[1]*step)
 }
 
 func (r *RoverImpl) ExecuteCommand(command string) {
