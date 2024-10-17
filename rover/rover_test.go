@@ -79,18 +79,16 @@ func TestRoverWrappingOnPlanetEdges(t *testing.T) {
 }
 
 func TestRoverTurnAndMove(t *testing.T) {
-	myPlanet := planet.NewPlanet(5, 5)                                          // Créer une planète
-	myRover := &rover.RoverImpl{X: 2, Y: 2, Orientation: "N", Planet: myPlanet} // Utiliser la planète
+	myPlanet := planet.NewPlanet(5, 5)
+	myRover := &rover.RoverImpl{X: 2, Y: 2, Orientation: "N", Planet: myPlanet}
 
-	// Tourne à droite (vers Est) et avance
 	myRover.Turn("R")
 	myRover.Move(1)
-	assert.Equal(t, 3, myRover.X) // X augmente car orienté Est
+	assert.Equal(t, 3, myRover.X)
 	assert.Equal(t, 2, myRover.Y)
 
-	// Tourne à gauche (vers Nord) et avance
 	myRover.Turn("L")
 	myRover.Move(1)
 	assert.Equal(t, 3, myRover.X)
-	assert.Equal(t, 1, myRover.Y) // Y diminue car orienté Nord
+	assert.Equal(t, 1, myRover.Y)
 }

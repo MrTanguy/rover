@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	// Initialize the planet and rover
+
 	planet := planet.NewPlanet(5, 5)
 	var myRover rover.Rover = &rover.RoverImpl{X: 2, Y: 2, Orientation: "N", Planet: planet}
 
