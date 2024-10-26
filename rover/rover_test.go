@@ -3,14 +3,21 @@ package rover_test
 import (
 	"testing"
 
+	roverBuilder "github.com/MrTanguy/rover/builder"
 	"github.com/MrTanguy/rover/planet"
 	"github.com/MrTanguy/rover/rover"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestRoverTurnLeft(t *testing.T) {
-	myPlanet := planet.NewPlanet(5, 5)
-	myRover := &rover.RoverImpl{X: 0, Y: 0, Orientation: "N", Planet: myPlanet}
+
+	rover_x := 0
+	rover_y := 0
+	roverOrientation := "N"
+	planet_x := 5
+	planet_y := 5
+
+	myRover := roverBuilder.Build(rover_x, rover_y, roverOrientation, planet_x, planet_y)
 
 	myRover.Turn("L")
 	assert.Equal(t, "W", myRover.Orientation)
