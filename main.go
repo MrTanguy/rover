@@ -17,7 +17,7 @@ func main() {
 	fmt.Println("Welcome to the Mars Rover Simulation!")
 	fmt.Println("The Rover is initially at position (2, 2) facing North.")
 	fmt.Println("You can enter the following commands:")
-	fmt.Println("'M' to move forward, 'B' to move backward, 'L' to turn left, 'R' to turn right")
+	fmt.Println("'F' to move forward, 'B' to move backward, 'L' to turn left, 'R' to turn right")
 	fmt.Println("Enter 'Q' to quit the simulation.")
 	fmt.Println("Please enter a series of commands (e.g., 'MRMLM'): ")
 
@@ -35,11 +35,10 @@ func main() {
 
 		for _, cmd := range strings.ToUpper(commands) {
 			switch cmd {
-			case 'M', 'B', 'L', 'R':
+			case 'F', 'B', 'L', 'R':
 				myRover.ExecuteCommand(string(cmd))
-				myRover.PrintState()
 			default:
-				fmt.Println("Invalid command. Please enter 'M', 'B', 'L', 'R' or 'Q' to quit.")
+				fmt.Println("Invalid command. Please enter 'F', 'B', 'L', 'R' or 'Q' to quit.")
 			}
 		}
 	}
