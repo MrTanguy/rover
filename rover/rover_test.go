@@ -81,7 +81,7 @@ func TestRoverToroidalWrapping(t *testing.T) {
 }
 
 func TestRoverWrappingOnPlanetEdges(t *testing.T) {
-	myPlanet := planet.NewPlanet(5, 5)
+	myPlanet := planet.New(planet.WithSize(5, 5))
 	myRover := &rover.RoverImpl{X: 4, Y: 4, Orientation: "E", Planet: myPlanet}
 
 	myRover.Move(1)
@@ -95,7 +95,7 @@ func TestRoverWrappingOnPlanetEdges(t *testing.T) {
 }
 
 func TestRoverTurnAndMove(t *testing.T) {
-	myPlanet := planet.NewPlanet(5, 5)
+	myPlanet := planet.New(planet.WithSize(5, 5))
 	myRover := &rover.RoverImpl{X: 2, Y: 2, Orientation: "N", Planet: myPlanet}
 
 	myRover.Turn("R")

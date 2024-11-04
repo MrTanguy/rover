@@ -25,7 +25,7 @@ var directionMap = map[string][2]int{
 type RoverImpl struct {
 	X, Y        int
 	Orientation string
-	Planet      *planet.Planet
+	Planet      planet.Planet
 }
 
 func (r *RoverImpl) Turn(direction string) {

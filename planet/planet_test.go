@@ -8,7 +8,7 @@ import (
 )
 
 func TestWrapX(t *testing.T) {
-	planet := planet.NewPlanet(5, 5)
+	planet := planet.New(planet.WithSize(5, 5))
 
 	assert.Equal(t, 4, planet.WrapX(4))  // Position normale
 	assert.Equal(t, 0, planet.WrapX(5))  // Doit se replier sur 0
@@ -16,7 +16,7 @@ func TestWrapX(t *testing.T) {
 }
 
 func TestWrapY(t *testing.T) {
-	planet := planet.NewPlanet(5, 5)
+	planet := planet.New(planet.WithSize(5, 5))
 
 	assert.Equal(t, 4, planet.WrapY(4))  // Position normale
 	assert.Equal(t, 0, planet.WrapY(5))  // Doit se replier sur 0

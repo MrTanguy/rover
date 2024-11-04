@@ -12,7 +12,7 @@ import (
 
 func main() {
 
-	planet := planet.NewPlanet(5, 5)
+	planet := planet.New(planet.WithSize(5, 5))
 	var myRover rover.Rover = &rover.RoverImpl{X: 2, Y: 2, Orientation: "N", Planet: planet}
 
 	fmt.Println("Welcome to the Mars Rover Simulation!")
