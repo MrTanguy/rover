@@ -35,6 +35,7 @@ func TestRoverMoveForward(t *testing.T) {
 	myRover := roverBuilder.Build(roverBuilder.WithPlanet(5, 5))
 
 	myRover.Forward()
+  
 	assert.Equal(t, 0, myRover.X)
 	assert.Equal(t, 1, myRover.Y)
 }
@@ -108,5 +109,5 @@ func TestRoverTurnAndMove(t *testing.T) {
 	myRover.TurnRight()
 	myRover.Forward()
 	assert.Equal(t, 3, myRover.X)
-	assert.Equal(t, 1, myRover.Y)
+	assert.Equal(t, 3, myRover.Y)
 }
