@@ -4,8 +4,6 @@ import (
 	"testing"
 
 	roverBuilder "github.com/MrTanguy/rover/builder"
-	"github.com/MrTanguy/rover/planet"
-	"github.com/MrTanguy/rover/rover"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -37,20 +35,20 @@ func TestRoverMoveForward(t *testing.T) {
 	myRover := roverBuilder.Build(roverBuilder.WithPlanet(5, 5))
 
 	myRover.Move(1)
-	assert.Equal(t, 2, myRover.X)
+	assert.Equal(t, 0, myRover.X)
 	assert.Equal(t, 1, myRover.Y)
 }
 
 func TestRoverMoveBackward(t *testing.T) {
 
-	// Rover orienté Nord en 2;2
+	// Rover orienté Nord en 0;0
 	// Sur une planète de 5;5
-	myRover := roverBuilder.Build(roverBuilder.WithPlanet(5, 5), roverBuilder.WithPosition(2, 2))
+	myRover := roverBuilder.Build(roverBuilder.WithPlanet(5, 5))
 
 	myRover.Move(-1)
 
-	assert.Equal(t, 2, myRover.X)
-	assert.Equal(t, 3, myRover.Y)
+	assert.Equal(t, 0, myRover.X)
+	assert.Equal(t, 4, myRover.Y)
 }
 
 func TestRoverExecuteCommand(t *testing.T) {
@@ -64,7 +62,7 @@ func TestRoverExecuteCommand(t *testing.T) {
 	myRover.ExecuteCommand("M")
 
 	assert.Equal(t, 1, myRover.X)
-	assert.Equal(t, 4, myRover.Y)
+	assert.Equal(t, 1, myRover.Y)
 	assert.Equal(t, "E", myRover.Orientation)
 }
 
@@ -77,12 +75,14 @@ func TestRoverToroidalWrapping(t *testing.T) {
 	myRover.Move(1)
 
 	assert.Equal(t, 0, myRover.X)
-	assert.Equal(t, 4, myRover.Y)
+	assert.Equal(t, 1, myRover.Y)
 }
 
 func TestRoverWrappingOnPlanetEdges(t *testing.T) {
-	myPlanet := planet.New(planet.WithSize(5, 5))
-	myRover := &rover.RoverImpl{X: 4, Y: 4, Orientation: "E", Planet: myPlanet}
+
+	// Rover orienté Est en 4;4
+	// Sur une planète de 5;5
+	myRover := roverBuilder.Build(roverBuilder.WithPosition(4, 4), roverBuilder.WithOrientation("E"), roverBuilder.WithPlanet(5, 5))
 
 	myRover.Move(1)
 	assert.Equal(t, 0, myRover.X)
@@ -91,12 +91,14 @@ func TestRoverWrappingOnPlanetEdges(t *testing.T) {
 	myRover.Turn("R")
 	myRover.Move(1)
 	assert.Equal(t, 0, myRover.X)
-	assert.Equal(t, 0, myRover.Y)
+	assert.Equal(t, 3, myRover.Y)
 }
 
 func TestRoverTurnAndMove(t *testing.T) {
-	myPlanet := planet.New(planet.WithSize(5, 5))
-	myRover := &rover.RoverImpl{X: 2, Y: 2, Orientation: "N", Planet: myPlanet}
+
+	// Rover orienté Nord en 2;2
+	// Sur une planète de 5;5
+	myRover := roverBuilder.Build(roverBuilder.WithPosition(2, 2), roverBuilder.WithPlanet(5, 5))
 
 	myRover.Turn("R")
 	myRover.Move(1)
@@ -106,5 +108,5 @@ func TestRoverTurnAndMove(t *testing.T) {
 	myRover.Turn("L")
 	myRover.Move(1)
 	assert.Equal(t, 3, myRover.X)
-	assert.Equal(t, 1, myRover.Y)
+	assert.Equal(t, 3, myRover.Y)
 }
