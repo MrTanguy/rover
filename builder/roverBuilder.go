@@ -18,7 +18,10 @@ func Build(opts ...RoverOption) *rover.RoverImpl {
 		defaultPlanetY     = 0
 	)
 
-	my_planet := &planet.Planet{Width: defaultPlanetX, Height: defaultPlanetY}
+	my_planet, err := planet.New(planet.WithSize(defaultPlanetX, defaultPlanetY))
+	if err != nil {
+		panic(err)
+	}
 
 	my_rover := &rover.RoverImpl{X: defaultX, Y: defaultY, Orientation: defaultOrientation, Planet: my_planet}
 

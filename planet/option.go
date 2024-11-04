@@ -8,7 +8,7 @@ func WithInfity() PlanetOption {
 	}
 }
 
-func WithSize(width, height int) PlanetOption {
+func WithSize(width int, height int) PlanetOption {
 	return func() Planet {
 		return &FinishedPlanet{
 			Width:  width,

@@ -1,6 +1,7 @@
 package roverBuilder
 
 import (
+	"github.com/MrTanguy/rover/planet"
 	"github.com/MrTanguy/rover/rover"
 )
 
@@ -21,18 +22,12 @@ func WithPosition(X int, Y int) RoverOption {
 
 func WithPlanet(Height int, Width int) RoverOption {
 	return func(r *rover.RoverImpl) {
-		r.Planet.Height = Height
-		r.Planet.Width = Width
+		r.Planet, _ = planet.New(planet.WithSize(Height, Width))
 	}
 }
 
-/*
 func WithInfinityPlanet() RoverOption {
 	return func(r *rover.RoverImpl) {
-		r.Planet.Height = math.MaxInt
-		r.Planet.Width = math.MaxInt
+		r.Planet, _ = planet.New(planet.WithInfity())
 	}
 }
-*/
-
-// func With
