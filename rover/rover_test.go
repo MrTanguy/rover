@@ -13,7 +13,7 @@ func TestRoverTurnLeft(t *testing.T) {
 	// Sur une planète de 5;5
 	myRover := roverBuilder.Build(roverBuilder.WithPlanet(5, 5))
 
-	myRover.Turn("L")
+	myRover.TurnLeft()
 
 	assert.Equal(t, "W", myRover.Orientation)
 }
@@ -24,7 +24,7 @@ func TestRoverTurnRight(t *testing.T) {
 	// Sur une planète de 5;5
 	myRover := roverBuilder.Build(roverBuilder.WithPlanet(5, 5))
 
-	myRover.Turn("R")
+	myRover.TurnRight()
 	assert.Equal(t, "E", myRover.Orientation)
 }
 
@@ -34,7 +34,8 @@ func TestRoverMoveForward(t *testing.T) {
 	// Sur une planète de 5;5
 	myRover := roverBuilder.Build(roverBuilder.WithPlanet(5, 5))
 
-	myRover.Move(1)
+	myRover.Forward()
+  
 	assert.Equal(t, 0, myRover.X)
 	assert.Equal(t, 1, myRover.Y)
 }
@@ -45,7 +46,7 @@ func TestRoverMoveBackward(t *testing.T) {
 	// Sur une planète de 5;5
 	myRover := roverBuilder.Build(roverBuilder.WithPlanet(5, 5))
 
-	myRover.Move(-1)
+	myRover.Backward()
 
 	assert.Equal(t, 0, myRover.X)
 	assert.Equal(t, 4, myRover.Y)
@@ -57,9 +58,9 @@ func TestRoverExecuteCommand(t *testing.T) {
 	// Sur une planète de 5;5
 	myRover := roverBuilder.Build(roverBuilder.WithPlanet(5, 5))
 
-	myRover.ExecuteCommand("M")
+	myRover.ExecuteCommand("F")
 	myRover.ExecuteCommand("R")
-	myRover.ExecuteCommand("M")
+	myRover.ExecuteCommand("F")
 
 	assert.Equal(t, 1, myRover.X)
 	assert.Equal(t, 1, myRover.Y)
@@ -72,7 +73,7 @@ func TestRoverToroidalWrapping(t *testing.T) {
 	// Sur une planète de 5;5
 	myRover := roverBuilder.Build(roverBuilder.WithPlanet(5, 5))
 
-	myRover.Move(1)
+	myRover.Forward()
 
 	assert.Equal(t, 0, myRover.X)
 	assert.Equal(t, 1, myRover.Y)
@@ -84,12 +85,12 @@ func TestRoverWrappingOnPlanetEdges(t *testing.T) {
 	// Sur une planète de 5;5
 	myRover := roverBuilder.Build(roverBuilder.WithPosition(4, 4), roverBuilder.WithOrientation("E"), roverBuilder.WithPlanet(5, 5))
 
-	myRover.Move(1)
+	myRover.Forward()
 	assert.Equal(t, 0, myRover.X)
 	assert.Equal(t, 4, myRover.Y)
 
-	myRover.Turn("R")
-	myRover.Move(1)
+	myRover.TurnRight()
+	myRover.Forward()
 	assert.Equal(t, 0, myRover.X)
 	assert.Equal(t, 3, myRover.Y)
 }
@@ -100,13 +101,13 @@ func TestRoverTurnAndMove(t *testing.T) {
 	// Sur une planète de 5;5
 	myRover := roverBuilder.Build(roverBuilder.WithPosition(2, 2), roverBuilder.WithPlanet(5, 5))
 
-	myRover.Turn("R")
-	myRover.Move(1)
+	myRover.TurnRight()
+	myRover.Forward()
 	assert.Equal(t, 3, myRover.X)
 	assert.Equal(t, 2, myRover.Y)
 
-	myRover.Turn("L")
-	myRover.Move(1)
+	myRover.TurnRight()
+	myRover.Forward()
 	assert.Equal(t, 3, myRover.X)
 	assert.Equal(t, 3, myRover.Y)
 }
