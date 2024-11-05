@@ -3,18 +3,43 @@ package interpreter
 import (
 	"bytes"
 	"fmt"
-	"github.com/MrTanguy/rover/rover"
 	"io"
 	"os"
 	"testing"
+
+	"github.com/MrTanguy/rover/rover"
 )
 
 type mockRover struct{}
 
-func (m *mockRover) Forward() rover.State   { return rover.State{} }
-func (m *mockRover) Backward() rover.State  { return rover.State{} }
-func (m *mockRover) TurnLeft() rover.State  { return rover.State{} }
-func (m *mockRover) TurnRight() rover.State { return rover.State{} }
+func (m *mockRover) Forward() rover.State {
+	return rover.State{
+		X:           0,
+		Y:           0,
+		Orientation: "N",
+	}
+}
+func (m *mockRover) Backward() rover.State {
+	return rover.State{
+		X:           1,
+		Y:           1,
+		Orientation: "S",
+	}
+}
+func (m *mockRover) TurnLeft() rover.State {
+	return rover.State{
+		X:           2,
+		Y:           2,
+		Orientation: "W",
+	}
+}
+func (m *mockRover) TurnRight() rover.State {
+	return rover.State{
+		X:           3,
+		Y:           3,
+		Orientation: "E",
+	}
+}
 
 func TestInterpreterCommands(t *testing.T) {
 	r := &mockRover{}
@@ -24,11 +49,11 @@ func TestInterpreterCommands(t *testing.T) {
 		cmd      string
 		expected string
 	}{
-		{"F", "Moved forward\n"},
-		{"B", "Moved backward\n"},
-		{"L", "Turned left\n"},
-		{"R", "Turned right\n"},
-		{"X", "Invalid command. Please enter F, B, L, R or Q to quit.\n"},
+		{"F", "rover is at x: 0 y: 0 orientation: N\n"},
+		{"B", "rover is at x: 1 y: 1 orientation: S\n"},
+		{"L", "rover is at x: 2 y: 2 orientation: W\n"},
+		{"R", "rover is at x: 3 y: 3 orientation: E\n"},
+		{"X", "Invalid command. Please enter F, B, L, R or Q to quit. \n"},
 	}
 
 	for _, tt := range tests {

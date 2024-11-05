@@ -6,6 +6,7 @@ import (
 	"io"
 	"net"
 	"os"
+	"strings"
 
 	"github.com/MrTanguy/rover/pilot"
 	"github.com/MrTanguy/rover/pilot/interpreter"
@@ -28,7 +29,7 @@ func NewSocketPilot(r rover.Rover) pilot.Pilot {
 func (s *SocketPilot) Run() {
 	ln, err := net.Listen("tcp", ":8080")
 	if err != nil {
-		fmt.Println("Error starting server:", err)
+		fmt.Printf("Error starting server: %w", err)
 		return
 	}
 	defer ln.Close()
@@ -37,7 +38,7 @@ func (s *SocketPilot) Run() {
 	for {
 		conn, err := ln.Accept()
 		if err != nil {
-			fmt.Println("Error accepting connection:", err)
+			fmt.Printf("Error accepting connection: %w", err)
 			continue
 		}
 		go s.handleConnection(conn)
@@ -92,7 +93,10 @@ func (s *SocketPilot) interpretAndCaptureOutput(commands string) string {
 
 	// Interpret each command
 	for _, cmd := range commands {
-		s.Interpreter.Interprete(string(cmd))
+		if strings.TrimSpace(string(cmd)) == "" {
+			continue
+		}
+		s.Interpreter.Interprete(strings.ToUpper(string(cmd)))
 	}
 
 	// Close the write end of the pipe and wait for the goroutine to finish

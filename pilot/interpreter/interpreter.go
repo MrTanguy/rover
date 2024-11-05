@@ -43,12 +43,6 @@ func (i *Interpreter) Run() {
 }
 
 func (i *Interpreter) Interprete(cmd string) {
-	// Trim any whitespace or invalid characters
-	cmd = strings.TrimSpace(cmd)
-	if cmd == "" {
-		return // Ignore empty commands
-	}
-
 	switch cmd {
 	case cmdForward:
 		fmt.Println(i.rover.Forward())
