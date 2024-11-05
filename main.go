@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
+	"github.com/MrTanguy/rover/pilot/socket"
 
 	roverBuilder "github.com/MrTanguy/rover/builder"
-	"github.com/MrTanguy/rover/pilot/interpreter"
 	"github.com/MrTanguy/rover/rover"
 )
 
@@ -24,7 +24,7 @@ func main() {
 	fmt.Println("Enter 'Q' to quit the simulation.")
 	fmt.Println("Please enter a series of commands (e.g., 'MRMLM'): ")
 
-	interpreter := interpreter.NewPilot(myRover)
+	interpreter := socket.NewSocketPilot(myRover)
 	interpreter.Run()
 
 }
