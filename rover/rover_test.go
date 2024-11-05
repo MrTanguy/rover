@@ -35,7 +35,7 @@ func TestRoverMoveForward(t *testing.T) {
 	myRover := roverBuilder.Build(roverBuilder.WithPlanet(5, 5))
 
 	myRover.Forward()
-  
+
 	assert.Equal(t, 0, myRover.X)
 	assert.Equal(t, 1, myRover.Y)
 }
@@ -50,21 +50,6 @@ func TestRoverMoveBackward(t *testing.T) {
 
 	assert.Equal(t, 0, myRover.X)
 	assert.Equal(t, 4, myRover.Y)
-}
-
-func TestRoverExecuteCommand(t *testing.T) {
-
-	// Rover orienté Nord en 0;0
-	// Sur une planète de 5;5
-	myRover := roverBuilder.Build(roverBuilder.WithPlanet(5, 5))
-
-	myRover.ExecuteCommand("F")
-	myRover.ExecuteCommand("R")
-	myRover.ExecuteCommand("F")
-
-	assert.Equal(t, 1, myRover.X)
-	assert.Equal(t, 1, myRover.Y)
-	assert.Equal(t, "E", myRover.Orientation)
 }
 
 func TestRoverToroidalWrapping(t *testing.T) {

@@ -8,11 +8,19 @@ import (
 )
 
 type Rover interface {
-	Forward()
-	Backward()
-	TurnRight()
-	TurnLeft()
-	ExecuteCommand(cmd string)
+	Forward() State
+	Backward() State
+	TurnRight() State
+	TurnLeft() State
+}
+
+type State struct {
+	X, Y        int
+	Orientation string
+}
+
+func (s State) String() string {
+	return fmt.Sprintf("rover is at x: %d y: %d orientation: %s", s.X, s.Y, s.Orientation)
 }
 
 var directions = []string{"N", "E", "S", "W"}
@@ -29,43 +37,34 @@ type RoverImpl struct {
 	Planet      planet.Planet
 }
 
-func (r *RoverImpl) Forward() {
+func (r *RoverImpl) state() State {
+	return State{X: r.X, Y: r.Y, Orientation: r.Orientation}
+}
+
+func (r *RoverImpl) Forward() State {
 	change := directionMap[r.Orientation]
 	r.X = r.Planet.WrapX(r.X + change[0])
 	r.Y = r.Planet.WrapY(r.Y + change[1])
-	fmt.Printf("Rover position: (%d, %d), Orientation: %s\n", r.X, r.Y, r.Orientation)
+	return r.state()
 }
 
-func (r *RoverImpl) Backward() {
+func (r *RoverImpl) Backward() State {
 	change := directionMap[r.Orientation]
 	r.X = r.Planet.WrapX(r.X - change[0])
 	r.Y = r.Planet.WrapY(r.Y - change[1])
-	fmt.Printf("Rover position: (%d, %d), Orientation: %s\n", r.X, r.Y, r.Orientation)
+	return r.state()
 }
 
-func (r *RoverImpl) TurnRight() {
+func (r *RoverImpl) TurnRight() State {
 	idx := utils.FindIndex(directions, r.Orientation)
 	idx = (idx + 1) % 4
 	r.Orientation = directions[idx]
-	fmt.Printf("Rover position: (%d, %d), Orientation: %s\n", r.X, r.Y, r.Orientation)
+	return r.state()
 }
 
-func (r *RoverImpl) TurnLeft() {
+func (r *RoverImpl) TurnLeft() State {
 	idx := utils.FindIndex(directions, r.Orientation)
 	idx = (idx + 3) % 4
 	r.Orientation = directions[idx]
-	fmt.Printf("Rover position: (%d, %d), Orientation: %s\n", r.X, r.Y, r.Orientation)
-}
-
-func (r *RoverImpl) ExecuteCommand(command string) {
-	switch command {
-	case "L":
-		r.TurnLeft()
-	case "R":
-		r.TurnRight()
-	case "F":
-		r.Forward()
-	case "B":
-		r.Backward()
-	}
+	return r.state()
 }
