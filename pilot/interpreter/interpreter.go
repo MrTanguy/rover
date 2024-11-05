@@ -26,6 +26,10 @@ func NewPilot(r rover.Rover) pilot.Pilot {
 	return &Interpreter{rover: r}
 }
 
+func NewInterpreter(r rover.Rover) Interpreter {
+	return Interpreter{rover: r}
+}
+
 func (i *Interpreter) Run() {
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
@@ -33,12 +37,18 @@ func (i *Interpreter) Run() {
 		scanner.Scan()
 		commands := scanner.Text()
 		for _, cmd := range strings.ToUpper(commands) {
-			i.interprete(string(cmd))
+			i.Interprete(string(cmd))
 		}
 	}
 }
 
-func (i *Interpreter) interprete(cmd string) {
+func (i *Interpreter) Interprete(cmd string) {
+	// Trim any whitespace or invalid characters
+	cmd = strings.TrimSpace(cmd)
+	if cmd == "" {
+		return // Ignore empty commands
+	}
+
 	switch cmd {
 	case cmdForward:
 		fmt.Println(i.rover.Forward())
