@@ -1,8 +1,8 @@
 package roverBuilder
 
 import (
-	"github.com/MrTanguy/rover/planet"
 	"github.com/MrTanguy/rover/rover"
+	planet "github.com/MrTanguy/rover/topologie"
 )
 
 type RoverOption func(r *rover.RoverImpl)

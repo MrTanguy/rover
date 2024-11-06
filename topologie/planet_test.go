@@ -3,7 +3,7 @@ package planet_test
 import (
 	"testing"
 
-	"github.com/MrTanguy/rover/planet"
+	planet "github.com/MrTanguy/rover/topologie"
 	"github.com/stretchr/testify/assert"
 )
 

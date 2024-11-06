@@ -8,8 +8,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/MrTanguy/rover/pilot"
-	"github.com/MrTanguy/rover/pilot/interpreter"
+	"github.com/MrTanguy/rover/missionControl"
+	"github.com/MrTanguy/rover/missionControl/interpreter"
 	"github.com/MrTanguy/rover/rover"
 )
 
@@ -19,7 +19,7 @@ type SocketPilot struct {
 }
 
 // NewSocketPilot creates a new SocketPilot instance
-func NewSocketPilot(r rover.Rover) pilot.Pilot {
+func NewSocketPilot(r rover.Rover) missionControl.MissionControl {
 	return &SocketPilot{
 		Interpreter: interpreter.NewInterpreter(r),
 	}
