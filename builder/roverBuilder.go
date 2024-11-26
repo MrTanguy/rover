@@ -18,7 +18,7 @@ func Build(opts ...RoverOption) *rover.RoverImpl {
 		defaultPlanetY     = 0
 	)
 
-	my_planet, err := planet.New(planet.WithSize(defaultPlanetX, defaultPlanetY))
+	my_planet, err := planet.New(false, planet.WithSize(defaultPlanetX, defaultPlanetY))
 	if err != nil {
 		panic(err)
 	}

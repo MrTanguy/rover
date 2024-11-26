@@ -4,7 +4,7 @@ import (
 	"net"
 	"testing"
 
-	"github.com/MrTanguy/rover/missionControl/interpreter"
+	"github.com/MrTanguy/rover/communication/interpreter"
 	"github.com/MrTanguy/rover/rover"
 )
 

@@ -1,17 +1,23 @@
 package planet
 
-import (
-	"errors"
-)
-
 type Planet interface {
 	WrapX(x int) int
 	WrapY(y int) int
+	seedObstacles(probability uint)
+	CheckObstacle(x uint, y uint) bool
 }
 
-func New(opts ...PlanetOption) (Planet, error) {
-	for _, opt := range opts {
-		return opt(), nil
+func New(infinite bool, opts ...PlanetOption) (Planet, error) {
+	var p Planet
+	p = &FinishedPlanet{
+		Width:  10,
+		Height: 10,
 	}
-	return nil, errors.New("planet: no valid options provided")
+	if infinite {
+		p = &InfinitePlanet{}
+	}
+	for _, opt := range opts {
+		opt(p)
+	}
+	return p, nil
 }

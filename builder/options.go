@@ -22,12 +22,12 @@ func WithPosition(X int, Y int) RoverOption {
 
 func WithPlanet(Height int, Width int) RoverOption {
 	return func(r *rover.RoverImpl) {
-		r.Planet, _ = planet.New(planet.WithSize(Height, Width))
+		r.Planet, _ = planet.New(false, planet.WithSize(Height, Width))
 	}
 }
 
 func WithInfinityPlanet() RoverOption {
 	return func(r *rover.RoverImpl) {
-		r.Planet, _ = planet.New(planet.WithInfity())
+		r.Planet, _ = planet.New(true)
 	}
 }

@@ -29,7 +29,7 @@ func NewSocketPilot(r rover.Rover) missionControl.MissionControl {
 func (s *SocketPilot) Run() {
 	ln, err := net.Listen("tcp", ":8080")
 	if err != nil {
-		fmt.Printf("Error starting server: %w", err)
+		fmt.Printf("Error starting server: %s", err)
 		return
 	}
 	defer ln.Close()
@@ -38,7 +38,7 @@ func (s *SocketPilot) Run() {
 	for {
 		conn, err := ln.Accept()
 		if err != nil {
-			fmt.Printf("Error accepting connection: %w", err)
+			fmt.Printf("Error accepting connection: %s", err)
 			continue
 		}
 		go s.handleConnection(conn)
