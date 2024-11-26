@@ -8,8 +8,8 @@ import (
 	"os"
 	"strings"
 
+	"github.com/MrTanguy/rover/communication/interpreter"
 	"github.com/MrTanguy/rover/missionControl"
-	"github.com/MrTanguy/rover/missionControl/interpreter"
 	"github.com/MrTanguy/rover/rover"
 )
 
@@ -67,22 +67,17 @@ func (s *SocketPilot) handleConnection(conn net.Conn) {
 	}
 }
 
-// interpretAndCaptureOutput captures output of Interpreter.Interprete and returns it as a string
 func (s *SocketPilot) interpretAndCaptureOutput(commands string) string {
-	// Create a pipe to capture output
 	r, w, _ := os.Pipe()
 
-	// Save the original os.Stdout
 	originalStdout := os.Stdout
-	defer func() { os.Stdout = originalStdout }() // Restore os.Stdout after the function
+	defer func() { os.Stdout = originalStdout }()
 
-	// Set os.Stdout to the write end of the pipe
 	os.Stdout = w
 
 	var outputBuffer bytes.Buffer
 	done := make(chan struct{})
 
-	// Start a goroutine to read from the read end of the pipe
 	go func() {
 		_, err := io.Copy(&outputBuffer, r)
 		if err != nil {
@@ -91,7 +86,6 @@ func (s *SocketPilot) interpretAndCaptureOutput(commands string) string {
 		close(done)
 	}()
 
-	// Interpret each command
 	for _, cmd := range commands {
 		if strings.TrimSpace(string(cmd)) == "" {
 			continue
@@ -99,13 +93,11 @@ func (s *SocketPilot) interpretAndCaptureOutput(commands string) string {
 		s.Interpreter.Interprete(strings.ToUpper(string(cmd)))
 	}
 
-	// Close the write end of the pipe and wait for the goroutine to finish
 	err := w.Close()
 	if err != nil {
 		fmt.Println("Error closing pipe:", err)
 	}
 	<-done
 
-	// Return the captured output as a string
 	return outputBuffer.String()
 }

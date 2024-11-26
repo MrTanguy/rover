@@ -1,6 +1,8 @@
 package planet
 
-import "errors"
+import (
+	"errors"
+)
 
 type Planet interface {
 	WrapX(x int) int

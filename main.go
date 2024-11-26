@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/MrTanguy/rover/missionControl/socket"
+	"github.com/MrTanguy/rover/communication/socket"
 
 	roverBuilder "github.com/MrTanguy/rover/builder"
 	"github.com/MrTanguy/rover/rover"

@@ -1,11 +1,11 @@
 package socket
 
 import (
-	"github.com/MrTanguy/rover/rover"
 	"net"
 	"testing"
 
-	"github.com/MrTanguy/rover/pilot/interpreter"
+	"github.com/MrTanguy/rover/missionControl/interpreter"
+	"github.com/MrTanguy/rover/rover"
 )
 
 // mockRover used to simulate rover movements
