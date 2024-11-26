@@ -17,7 +17,7 @@ func New(infinite bool, opts ...PlanetOption) (Planet, error) {
 		p = &InfinitePlanet{}
 	}
 	for _, opt := range opts {
-		opt(p)
+		opt(&p)
 	}
 	return p, nil
 }
