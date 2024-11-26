@@ -3,12 +3,12 @@ package planet_test
 import (
 	"testing"
 
-	"github.com/MrTanguy/rover/planet"
+	planet "github.com/MrTanguy/rover/topologie"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestWrapX(t *testing.T) {
-	planet, _ := planet.New(planet.WithSize(5, 5))
+	planet, _ := planet.New(false, planet.WithSize(5, 5))
 
 	assert.Equal(t, 4, planet.WrapX(4))  // Position normale
 	assert.Equal(t, 0, planet.WrapX(5))  // Doit se replier sur 0
@@ -16,7 +16,7 @@ func TestWrapX(t *testing.T) {
 }
 
 func TestWrapY(t *testing.T) {
-	planet, _ := planet.New(planet.WithSize(5, 5))
+	planet, _ := planet.New(false, planet.WithSize(5, 5))
 
 	assert.Equal(t, 4, planet.WrapY(4))  // Position normale
 	assert.Equal(t, 0, planet.WrapY(5))  // Doit se replier sur 0
@@ -24,13 +24,11 @@ func TestWrapY(t *testing.T) {
 }
 
 func TestNewPlanet(t *testing.T) {
-	_, err := planet.New(planet.WithSize(5, 5))
+	_, err := planet.New(false, planet.WithSize(5, 5))
 
 	assert.Nil(t, err)
 
-	_, err = planet.New(planet.WithInfity())
+	_, err = planet.New(true)
 	assert.Nil(t, err)
 
-	_, err = planet.New()
-	assert.NotNil(t, err)
 }

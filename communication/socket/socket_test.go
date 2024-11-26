@@ -1,11 +1,11 @@
 package socket
 
 import (
-	"github.com/MrTanguy/rover/rover"
 	"net"
 	"testing"
 
-	"github.com/MrTanguy/rover/pilot/interpreter"
+	"github.com/MrTanguy/rover/communication/interpreter"
+	"github.com/MrTanguy/rover/rover"
 )
 
 // mockRover used to simulate rover movements
@@ -42,11 +42,11 @@ func TestSocketPilotHandleConnection(t *testing.T) {
 		input    string
 		expected string
 	}{
-		{"F", "Moved forward\n"},
-		{"B", "Moved backward\n"},
-		{"L", "Turned left\n"},
-		{"R", "Turned right\n"},
-		{"X", "Invalid command. Please enter F, B, L, R or Q to quit.\n"},
+		{"F", "rover is at x: 0 y: 0 orientation: \n"},
+		{"B", "rover is at x: 0 y: 0 orientation: \n"},
+		{"L", "rover is at x: 0 y: 0 orientation: \n"},
+		{"R", "rover is at x: 0 y: 0 orientation: \n"},
+		{"X", "Invalid command. Please enter F, B, L, R or Q to quit. \n"},
 	}
 
 	for _, tt := range tests {

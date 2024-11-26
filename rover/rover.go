@@ -3,7 +3,7 @@ package rover
 import (
 	"fmt"
 
-	"github.com/MrTanguy/rover/planet"
+	planet "github.com/MrTanguy/rover/topologie"
 	"github.com/MrTanguy/rover/utils"
 )
 

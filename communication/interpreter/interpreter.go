@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/MrTanguy/rover/pilot"
+	"github.com/MrTanguy/rover/missionControl"
 	"github.com/MrTanguy/rover/rover"
 )
 
@@ -22,7 +22,7 @@ type Interpreter struct {
 	rover rover.Rover
 }
 
-func NewPilot(r rover.Rover) pilot.Pilot {
+func NewPilot(r rover.Rover) missionControl.MissionControl {
 	return &Interpreter{rover: r}
 }
 
