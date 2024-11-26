@@ -4,7 +4,7 @@ type Planet interface {
 	WrapX(x int) int
 	WrapY(y int) int
 	seedObstacles(probability uint)
-	CheckObstacle(x uint, y uint) bool
+	CheckObstacle(x int, y int) bool
 }
 
 func New(infinite bool, opts ...PlanetOption) (Planet, error) {

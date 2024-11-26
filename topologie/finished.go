@@ -51,10 +51,10 @@ func (p *FinishedPlanet) seedObstacles(probability uint) {
 
 	for i := int(0); i < number; i++ {
 		x, y := p.randPosition()
-		err := p.obstacle.Set(x, y)
+		err := p.obstacle.Set(int(x), int(y))
 		for err != nil {
 			x, y = p.randPosition()
-			err = p.obstacle.Set(x, y)
+			err = p.obstacle.Set(int(x), int(y))
 		}
 	}
 }
@@ -71,6 +71,6 @@ func (p *FinishedPlanet) randPosition() (uint, uint) {
 	return x, y
 }
 
-func (p *FinishedPlanet) CheckObstacle(x uint, y uint) bool {
-	return false
+func (p *FinishedPlanet) CheckObstacle(x int, y int) bool {
+	return p.obstacle.Check(x, y)
 }

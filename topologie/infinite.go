@@ -29,7 +29,7 @@ func (p *InfinitePlanet) seedObstacles(probability uint) {
 	p.probability = probability
 }
 
-func (p *InfinitePlanet) CheckObstacle(x uint, y uint) bool {
+func (p *InfinitePlanet) CheckObstacle(x int, y int) bool {
 	a := rand.Intn(100)
 
 	if p.obstacles.Check(x, y) {

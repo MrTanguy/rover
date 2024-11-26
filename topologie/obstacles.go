@@ -3,7 +3,7 @@ package planet
 import "fmt"
 
 type Obstacles struct {
-	obstacles map[uint]map[uint]bool
+	obstacles map[int]map[int]bool
 }
 
 const (
@@ -12,19 +12,25 @@ const (
 
 func NewObstacles() *Obstacles {
 	return &Obstacles{
-		obstacles: make(map[uint]map[uint]bool),
+		obstacles: make(map[int]map[int]bool),
 	}
 }
 
-func (p *Obstacles) Set(x uint, y uint) error {
-	if _, ok := p.obstacles[x]; ok {
+func (p *Obstacles) Set(x int, y int) error {
+	// Si la clé x n'existe pas encore dans la map, initialisez-la
+	if _, ok := p.obstacles[x]; !ok {
+		p.obstacles[x] = make(map[int]bool)
+	}
+	// Si la position (x, y) est déjà définie, renvoyez une erreur
+	if p.obstacles[x][y] {
 		return fmt.Errorf(ErrAlreadySet, x, y)
 	}
+	// Sinon, définissez l'obstacle
 	p.obstacles[x][y] = true
 	return nil
 }
 
-func (p *Obstacles) Check(x uint, y uint) bool {
+func (p *Obstacles) Check(x int, y int) bool {
 	ok, _ := p.obstacles[x][y]
 	return ok
 }
