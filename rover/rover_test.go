@@ -42,7 +42,7 @@ func TestRoverMoveForwardOnInfinityPlanet(t *testing.T) {
 	myRover.Forward()
 
 	assert.Equal(t, 0, myRover.X)
-	assert.Equal(t, 0, myRover.Y)
+	assert.Equal(t, 1, myRover.Y)
 	assert.Equal(t, "N", myRover.Orientation)
 }
 
@@ -55,7 +55,7 @@ func TestRoverMoveBackwardOnInfinityPlanet(t *testing.T) {
 	myRover.Backward()
 
 	assert.Equal(t, 0, myRover.X)
-	assert.Equal(t, 0, myRover.Y)
+	assert.Equal(t, -1, myRover.Y)
 	assert.Equal(t, "N", myRover.Orientation)
 }
 
@@ -74,8 +74,8 @@ func TestRoverMultipleCommandsOnInfinityPlanet(t *testing.T) {
 	myRover.TurnLeft()
 	myRover.Forward()
 
-	assert.Equal(t, 0, myRover.X)
-	assert.Equal(t, 0, myRover.Y)
+	assert.Equal(t, -2, myRover.X)
+	assert.Equal(t, 4, myRover.Y)
 	assert.Equal(t, "N", myRover.Orientation)
 }
 
