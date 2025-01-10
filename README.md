@@ -2,11 +2,10 @@
 
 ![Gopher on a rover on Mars](./assets/gopher.webp)
 
-Welcome to the Rover project! This repository contains a Go-based application designed for [insert purpose here].
+Welcome to the Rover project! This repository contains a Go-based application designed to simulate Rover communications.
 
 ## Table of Contents
 
-- [Overview](#overview)
 - [Features](#features)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
@@ -16,15 +15,10 @@ Welcome to the Rover project! This repository contains a Go-based application de
 - [Contributing](#contributing)
 - [License](#license)
 
-## Overview
-
-Rover is a project aimed at [describe purpose or functionality of the project]. It leverages Go’s efficiency and simplicity to deliver [key outcomes or features].
-
 ## Features
 
-- [Feature 1]
-- [Feature 2]
-- [Feature 3]
+- Rover movements
+- Socket communication
 
 ## Getting Started
 
@@ -57,16 +51,20 @@ Run the application with:
 go run main.go
 ```
 
-[Add details about CLI options, configurations, or any input required.]
+Connect to the socket with:
+```bash
+telnet [IP] [PORT]
+```
 
 ## Project Structure
 
 - `.github/workflows/` - CI/CD workflows for GitHub Actions.
-- `builder/` - [Describe contents and purpose].
-- `pilot/` - [Describe contents and purpose].
-- `planet/` - [Describe contents and purpose].
-- `rover/` - [Describe contents and purpose].
-- `utils/` - [Describe contents and purpose].
+- `assets/` - Readme image.
+- `builder/` - Rover Builder.
+- `communication/` - Socket.
+- `rover/` - Rover movements.
+- `topologie/` - Planet Builder.
+- `utils/` - Usefull functions.
 - `main.go` - Entry point of the application.
 
 ## Contributing
